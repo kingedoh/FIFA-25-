@@ -1,49 +1,86 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>FIFA 25 Webapp</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FIFA 25 Vertical Prototype</title>
   <style>
-    canvas { background: green; display:block; margin:auto; }
-    #preMatchScreen { position:absolute; width:100%; height:100%; background:black;
-      display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:10; color:white;}
-    #preMatchScreen h1 { font-size:60px; margin:10px; }
-    #preMatchScreen button { padding:15px 30px; font-size:20px; border-radius:10px; cursor:pointer; border:none; margin-top:10px; }
-    #controls { text-align:center; margin:10px; }
-    #controls button { padding:10px 20px; font-size:16px; margin:3px; }
-
-    #analogContainer { position:absolute; bottom:20px; left:20px; width:120px; height:120px;
-      border-radius:50%; background:rgba(200,200,200,0.3); touch-action:none; }
-    #stick { width:60px; height:60px; background:rgba(100,100,255,0.6); border-radius:50%;
-      position:absolute; top:30px; left:30px; }
+    body {
+      margin:0;
+      padding:0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      overflow: hidden;
+    }
+    #gameContainer {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+    }
+    canvas {
+      background: green;
+      display: block;
+      margin: 0 auto;
+      border: 2px solid white;
+    }
+    #controls {
+      margin: 10px;
+    }
+    select, button {
+      padding: 8px;
+      margin: 5px;
+    }
+    #splashScreen {
+      position: absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:black;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      z-index:10;
+    }
+    #splashScreen img {
+      max-width:80%;
+      height:auto;
+      margin:10px 0;
+    }
+    #splashScreen h1 {
+      color:white;
+      font-size:48px;
+      margin:10px;
+    }
   </style>
 </head>
 <body>
-  <!-- Pre-match splash -->
-  <div id="preMatchScreen">
-    <h1>FIFA 25</h1>
-    <label>Your Team: <select id="playerTeamSelect"></select></label>
-    <label>Opponent: <select id="aiTeamSelect"></select></label>
-    <label>Difficulty: <select id="difficulty">
-      <option>Easy</option><option>Normal</option><option>Amateur</option>
-      <option>Hard</option><option>Expert</option>
-    </select></label>
-    <button id="startMatchBtn">Start Match</button>
-  </div>
+  <div id="gameContainer">
+    <canvas id="gameCanvas" width="800" height="500"></canvas>
 
-  <canvas id="gameCanvas" width="800" height="500"></canvas>
-  <div id="scoreboard" style="text-align:center; font-size:24px;">Score: 0 | AI: 0</div>
-
-  <!-- Action buttons -->
-  <div id="controls">
-    <button id="action">Shoot/Pass</button>
-    <button id="switch">Switch Player</button>
-  </div>
-
-  <!-- Virtual analog stick -->
-  <div id="analogContainer">
-    <div id="stick"></div>
+    <div id="splashScreen">
+      <h1>FIFA 25</h1>
+      <img src="images/splash.jpg" alt="Salah Messi Ronaldo">
+      <div id="controls">
+        <label for="playerTeam">Your Team: </label>
+        <select id="playerTeam"></select>
+        <label for="aiTeam">Opponent Team: </label>
+        <select id="aiTeam"></select>
+        <label for="difficulty">Difficulty: </label>
+        <select id="difficulty">
+          <option>Easy</option>
+          <option>Normal</option>
+          <option>Amateur</option>
+          <option>Hard</option>
+          <option>Expert</option>
+        </select>
+        <br>
+        <button id="startMatch">Start Match</button>
+      </div>
+    </div>
   </div>
 
   <script src="game.js"></script>
-</body>                                        
+</body>
 </html>
